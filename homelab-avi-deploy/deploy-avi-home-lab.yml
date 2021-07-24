@@ -1,3 +1,0 @@
----
-  - import_playbook: deploy-controllers.yml
-  - import_playbook: config-cluster-node01.yml

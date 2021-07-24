@@ -1,0 +1,22 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - vars/lab_vc_nsxt_variables.yml
+    - vars/lab_vc_nsxt_vault.yml
+  gather_facts: false
+  tasks:
+  - name: Create T1 Logical Router
+    uri:
+      url: "https://{{ nsxt_cont01_ip }}/policy/api/v1/infra/tier-1s/T1-AVI-MGT"
+      force_basic_auth: yes
+      validate_certs: "{{nsxt_validate_certs}}"
+      headers:
+        Accept: "application/json"
+        Content-Type: "application/json"
+      user: "{{ nsxt_user }}"
+      password: "{{ nsxt_password }}"
+      method: PATCH
+      body: "{{ lookup('template','./create_nsxt_t1.json.j2') | to_json }}"
+      status_code: "200"
+      body_format: json

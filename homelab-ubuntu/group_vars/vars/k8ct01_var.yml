@@ -1,0 +1,13 @@
+    Datastore:                 Shared_VMs                           # vSphere datastore              
+    DatastoreDir:              /SDDCLab-ISO-Folder                  # vSphere datastore ISO directory                            
+    Ubuntu_VMName:              "{{ Ubuntu_Hostname }}"          # Ubuntu VM name of the virtual machine          
+    Ubuntu_DiskSize:           50                                   # Ubuntu VM disksize in gigabytes
+    Ubuntu_Mem:                2048                                 # Ubuntu VM memory size in megabytes
+    Ubuntu_CPUs:               1                                    # Ubuntu VM number of CPUs 
+    Ubuntu_NoCores:            2                                    # Ubuntu VM number of cores
+    Ubuntu_PG:                 pg-mgt-vlan-401                      # Ubuntu VM vSphere portgroup 
+    Ubuntu_IP:                 172.16.1.210/24                      # Ubuntu OS IPv4 address
+    Ubuntu_Gateway:            172.16.1.1                           # Ubuntu OS IPv4 gateway
+    Ubuntu_Hostname:           lab-vc-k8ct01                        # Ubuntu OS hostname
+    Ubuntu_User:               garethl                              # Ubuntu OS username
+    Ubuntu_UserPassword:       F1ghtZclub!                          # Ubuntu OS password

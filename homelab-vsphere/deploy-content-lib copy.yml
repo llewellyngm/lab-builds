@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Create Local Content Library
+      community.vmware.vmware_content_library_manager:
+        hostname: '{{ vcenter_host }}'
+        username: '{{ vcenter_user }}'
+        password: '{{ vcenter_password }}'
+        library_name: '{{ lib_name }}'
+        library_description: '{{ lib_description }}'
+        library_type: local
+        datastore_name: '{{ lib_datastore }}'
+        state: present
+        validate_certs: 'no'

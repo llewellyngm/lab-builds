@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  name: createNsxT1Gateway.yml
+  tasks:
+    - name: createNsxT1Gateway_Playbook
+      ansible.builtin.debug:
+        msg: "Starting playbook: Deploy T1"
+      - name: Create NSX-T Tier-1 Gateway
+        nsxt_policy_tier1:
+          hostname: '172.16.1.21'
+          username: 'admin'
+          password: 'VMware1!VMware1!'
+          validate_certs: 'False'
+          state: present
+          Description:    Tier-1 Gateway for SDDC.Lab
+          FailoverMode:   'NON_PREEMPTIVE'                     
+          Tier0Gateway:   T0-LAB-VC-DC01-01
+          PoolAllocation: ROUTING
+          RouteAdvertisementTypes:
+            - TIER1_CONNECTED

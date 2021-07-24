@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+    - /home/garethl/.ansible/playbooks/vars/lab_vc_avi_variables.yml
+    - /home/garethl/.ansible/playbooks/vars/lab_vc_vault.yml
+  tasks:
+    - name: Create Local Content Library
+      community.vmware.vmware_content_library_manager:
+        hostname: '{{ vcenter_host }}'
+        username: '{{ vcenter_user }}'
+        password: '{{ vcenter_password }}'
+        library_name: avi-content-lib
+        library_description: 'AVI Library with Datastore Backing'
+        library_type: local
+        datastore_name: 'lab-vc-nas01-nfs01'
+        state: present
+        validate_certs: 'no'

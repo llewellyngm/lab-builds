@@ -1,0 +1,43 @@
+---
+- hosts: localhost
+  connection: local
+    vars_files:
+    - vars/default.yml
+  roles:
+    - { role: avinetworks.avicontroller_vmware }
+    - { role: avinetworks.avisdk }
+    gather_facts: false
+     tasks:
+       - name: Set Backup Passphrase
+        avi_backupconfiguration:
+          controller: "{{ controller_ip_1 }}"
+          username: "{{ avi_credentials.username }}"
+          password: "{{ avi_credentials.password }}"
+          api_version: "{{ avi_credentials.api_version }}"
+          name: Backup-Configuration
+          backup_passphrase: "{{ backup_passphrase }}"
+          upload_to_remote_host: false
+       - name: Cloud Cluster Configuration
+        avi_cluster:
+          controller: "{{ controller_ip_1 }}"
+          username: "{{ avi_credentials.username }}"
+          password: "{{ avi_credentials.password }}"
+          api_version: "{{ avi_credentials.api_version }}"
+          virtual_ip:
+            type: V4
+            addr: "{{ controller_cluster_vip }}"
+          nodes:
+              - name: "{{ controller_name_1 }}" 
+                ip:
+                  type: V4
+                  addr: "{{ controller_ip_1 }}"
+              - name: "{{ controller_name_2 }}"
+                ip:
+                  type: V4
+                  addr: "{{ controller_ip_2 }}"
+              - name: "{{ controller_name_3 }}"
+                ip:
+                  type: V4
+                  addr: "{{ controller_ip_3 }}"
+          name: cluster01
+          tenant_uuid: "admin"

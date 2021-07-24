@@ -1,0 +1,5 @@
+####################################### NSX-T ##############################
+nsxt_t0: 'T0-LAB-VC-DC01-01'
+nsxt_validate_certs: 'no'
+
+lab-vc-avi-t1: 'T1-AVI-MGT'

@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+    - group_vars/vars/lab_vc_avi_variables.yml
+    - group_vars/vault/lab_vc_vault.yml
+  #roles:
+    #- { role: avinetworks.avicontroller-vmware }
+    #- { role: avinetworks.avisdk }
+
+# Check the Cluster Deployment Status
+  tasks:
+    - name: Check Cluster Status
+      uri:
+        validate_certs: false
+        url: "https://{{ controller_ip_1 }}/api/cluster/runtime"
+        method: GET
+      register: cluster_status_response
+      until: cluster_status_response.json.cluster_state.state == "CLUSTER_UP_HA_ACTIVE" #CLUSTER_UP_NO_HA (for a 1-node cluster).
+      retries: 120
+      delay: 60

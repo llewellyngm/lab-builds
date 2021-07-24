@@ -1,0 +1,39 @@
+# Copyright 2018 VMware, Inc.
+# SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
+---
+#
+# Playbook to test Tier1
+#
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Update Tier1
+      nsxt_policy_tier1:
+        hostname: "default"
+        username: "default"
+        password: "default"
+        validate_certs: False
+        ca_path: /path/to/my/ca-bundle
+        display_name: test-tier22222
+        state: present
+        failover_mode: "PREEMPTIVE"
+        disable_firewall: True
+        force_whitelisting: True
+        enable_standby_relocation: False
+        tags:
+          - scope: "a"
+            tag: "b"
+        route_advertisement_rules:
+          - name: "test-route-advertisement-rules"
+            route_advertisement_types: ['TIER1_STATIC_ROUTES', 'TIER1_CONNECTED']
+            subnets: ["35.1.1.1/23"]
+        route_advertisement_types: ['TIER1_STATIC_ROUTES', 'TIER1_CONNECTED', 'TIER1_NAT']
+        tier0_display_name: "node-t0"
+
+        locale_services:
+          - state: present
+            display_name: test-t1ls-2
+            route_redistribution_config:
+              redistribution_rules:
+                - name: abc
+                  route_redistribution_types: ["TIER0_STATIC", "TIER0_NAT"]

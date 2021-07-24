@@ -1,0 +1,17 @@
+---
+# TEMPLATE FOR CONTROLLER DEPLOYMENT AND CLUSTERING in VMWARE
+
+# Vcenter credentials
+#
+vcenter_host:              "{{ vc_host }}"
+vcenter_user:              "{{ vc_user }}"
+vcenter_password:          "{{ vc_password }}"
+vcenter_datacenter:        MK19
+vmware_cluster_name:       lab-vc-workload"
+vmware_datastore:          lab-vc-nas01-nfs01
+vcenter_con_folder:        lab-vc-k8
+Ubuntu_DNS:                172.16.1.2,172.16.1.3                # Ubuntu OS DNS server
+Ubuntu_SearchDomain:       vcumulus.lab                         # Ubuntu OS DNS search domain
+UbuntuOSLocale:            en_US                                # Ubuntu OS locale
+UbuntuOSKeyboardLayout:    en                                   # Ubuntu OS keyboard layout 
+UbuntuOSKeyboardVariant:   us                                   # Ubuntu OS keyboard variant

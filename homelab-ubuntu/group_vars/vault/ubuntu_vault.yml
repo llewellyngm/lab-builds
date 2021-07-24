@@ -1,0 +1,33 @@
+
+######################################## vCenter ###########################
+#
+vc_host: lab-vc-vcsa01.vcumulus.lab
+vc_user: administrator@vsphere.local
+vc_password: "VMware1!VMware1!"
+
+######################################## AVI Users #########################
+#
+avi_cred_user: "admin"
+avi_cred_pwd: "F1ghtZclub!"
+avi_backup_pphrase: 'testpassphrase'
+avi_nsxt_cloudname: 'lab-vc-nsxt-user'
+avi_vmware_cloudname: 'lab-vc-vcsa-user'
+# Controller default password (https://portal.avinetworks.com/)
+avi_old_pwd: "58NFaGDJm(PJH0G"
+
+####################################### NSX-T Users ########################
+#
+nsxt_user: 'admin'
+nsxt_password: 'VMware1!VMware1!'
+
+####################################### NSX-T ##############################
+#
+nsxt_vc_lab_vip: lab-vc-vcsa01.vcumulus.lab
+nsxt_cont01_ip: '172.16.1.21'
+nsxt_cont01_hostname: nsxt_policy_tier1
+nsxt_cont02_ip:
+nsxt_cont02_hostname:
+nsxt_cont03_ip:
+nsxt_cont03_hostnmae:
+nsxt_cluster_vip:
+nsxt_cluster_hostname:

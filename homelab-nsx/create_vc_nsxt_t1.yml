@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  become: yes
+  vars_files:
+    - vars/lab_vc_nsxt_variables.yml
+    - vars/lab_vc_nsxt_vault.yml
+  tasks:
+    - name: Modify Tier1
+      vmware.ansible_for_nsxt.nsxt_policy_tier1:
+        hostname: "{{ nsxt_cont01_ip }}"
+        username: "{{ nsxt_user }}"
+        password: "{{ nsxt_password }}"
+        validate_certs: "{{ nsxt_validate_certs }}"
+        state: "{{ state }}"
+        display_name: "{{ lab-vc-avi-t1 }}"
+        tier0_display_name: "{{ nsxt_t0 }}"
+        tags: "{{ item.tags }}"

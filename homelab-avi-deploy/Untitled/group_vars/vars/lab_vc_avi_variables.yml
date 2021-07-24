@@ -1,0 +1,91 @@
+---
+# TEMPLATE FOR CONTROLLER DEPLOYMENT AND CLUSTERING in VMWARE
+
+# ovftool is part of the SDK
+ovftool_path: /usr/lib/vmware-ovftool
+
+# Controller Name and IP
+#
+controller_ip_1: "172.16.1.151"
+controller_name_1: "lab-vc-alb01"
+controller_ip_2: "172.16.1.152"
+controller_name_2: "lab-vc-alb02"
+controller_ip_3: "172.16.1.153"
+controller_name_3: "lab-vc-alb03"
+
+# Info for Controller Placement
+con_mgmt_portgroup: "pg-mgt-vlan-401"    # VMware MGMT PortGroup for Controller
+con_mgmt_mask: 255.255.255.0
+con_default_gw: 172.16.1.1
+
+# Cluster Info for Avi Controller
+#
+controller_cluster_vip: 172.16.1.150
+avicluster_name: 'lab-vc-avi01'
+avi_tennt_uuid: 'lab-vc'
+# Avi Controller Credentials
+#
+avi_credentials:
+  controller: "{{ controller_cluster_vip }}"
+  username: "{{ avi_cred_user }}"
+  password: "{{ avi_cred_pwd }}"
+  api_version: "18.2.3"
+
+# Controller default password (https://portal.avinetworks.com/)
+#
+old_password: "{{ avi_old_pwd }}"
+
+# Vcenter credentials
+#
+vcenter_host:  "{{ vc_host }}"
+vcenter_user:  "{{ vc_user }}"
+vcenter_password:  "{{ vc_password }}"
+datacenter: MK19
+vmware_cluster_name: "lab-vc-workload"
+vmware_datastore: '{{ datastore | default(omit) }}'
+con_folder: vmware/avi
+
+#Controller Image Location
+#
+ova_path: "/home/garethl/.ansible/playbooks/files/controller-20.1.6-9132.ova"
+
+# Avi System Configuration
+#
+# DNS variables
+dns_servers: [ 172.16.1.2, 172.16.1.3 ]
+
+# NTP variables
+ntp_servers: [ '192.168.1.13', '192.168.1.14' ]
+ntp_type: "V4"  #If servers are hostname use type "DNS", if IP use type "V4"
+
+#Email for admin user (password resets)
+admin_email: garethl@vcumulus.co.uk   
+
+# Backup Passphrase (encrypt sensitive fields)
+backup_passphrase: "{{ avi_backup_pphrase }}"
+
+##AVI vSphere Content library details##
+lib_name: 'AVI Content Library'
+lib_description: 'AVI Content Library for Service Engine deployment'
+lib_datastore: 'lab-vc-nas01-nfs01'
+
+##AVI vSphere Cloud Config##
+avi_vm_vmware_cloud_name: lab_vc_vmware_cloud
+avi_vm_nsxr_cloud_name: lab_vc_vmware_cloud_test
+
+##AVI vSphere Cloud SE Config##
+se_vc_mgmt_portgroup: "pg-mgt-vlan-1254"
+se_vc_mgmt_network: 172.16.254.0
+se_vc_mgmt_mask: 24
+se_vc_mgmt_start_range: 172.16.254.150
+se_vc_mgmt_end_range: 172.16.254.159
+se_vc_default_gateway: 172.16.255.1
+
+##AVI Cluser Status ##
+avi_cluster_starting: 'CLUSTER_STARTING_UP'
+avi_cluster_no_ha: 'CLUSTER_UP_NO_HA'
+avi_cluster_rebooting: 'CLUSTER_REBOOTING'
+avi_cluster_compomised: 'CLUSTER_UP_HA_COMPROMISED'
+avi_cluster_processing: 'CLUSTER_PROCESSING'
+avi_cluster_not_ready: 'CLUSTER_UP_HA_NOT_READY'
+avi_cluster_up: "CLUSTER_UP_HA_ACTIVE"

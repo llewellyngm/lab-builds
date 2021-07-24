@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+      - vars/lab_vc_avi_variables.yml
+      - vars/lab_vc_vault.yml
+  roles:
+    - role: avinetworks.avisdk
+  tasks:
+    - name: Cloud Connector Configuration
+      avi_cloud:
+        name: "{{ avi_vm_cloud_name }}"
+        controller: "{{ controller_cluster_vip }}"
+        username: "{{ avi_credentials.username }}"
+        password: "{{ avi_credentials.password }}"
+        vtype: CLOUD_VCENTER
+        dhcp_enabled: false
+        license_type: "LIC_CORES"
+        vcenter_configuration:
+          username: "{{ vc_user }}"
+          password: "{{ vcenter_password }}"
+          datacenter: "{{ datacenter }}"
+          management_network: "{{ '/api/vimgrnwruntime/?name=' + se_vc_mgmt_portgroup }}"
+          privilege: "WRITE_ACCESS"
+          vcenter_url: "{{ vcenter_host }}"
